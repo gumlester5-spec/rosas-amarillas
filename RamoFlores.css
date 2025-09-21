@@ -1,0 +1,625 @@
+/* Fondo */
+.ramo-container {
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fff8e1 0%, #ffe082 100%);
+  padding: 20px;
+  overflow: hidden;
+  position: relative; /* Necesario para la animación de fondo */
+  cursor: pointer;
+  /* Evita la selección de texto en toda la página */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE10+/Edge */
+  user-select: none;         /* Estándar */
+}
+
+/* Contenedor para el ramo y los corazones */
+.ramo-y-frases-container {
+  position: relative;
+  width: 100%;
+  max-width: 700px; /* Ancho para dar espacio a los corazones */
+}
+/* SVG */
+.ramo-svg {
+  width: 90vw;
+  max-width: 500px;
+  height: auto;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+  display: block;
+  margin: 0 auto; /* Centra el SVG dentro del contenedor */
+  cursor: grab;
+}
+
+/* Tallo */
+.tallo {
+  stroke: #388e3c;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.hoja-flor {
+  fill: #66bb6a;
+  stroke: #388e3c;
+  stroke-width: 1;
+}
+
+/* Animaciones */
+@keyframes aparecerDesdeAbajo {
+  from {
+    opacity: 0;
+    transform: translateY(200px) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Estado inicial y animación para todos los elementos del ramo */
+.flor, .hoja, .envoltorio, .lazo {
+  opacity: 0;
+  animation: aparecerDesdeAbajo 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  cursor: pointer;
+}
+
+/* Animación para hojas y flores */
+.hoja:nth-of-type(1) { animation-delay: 0.2s; }
+.hoja:nth-of-type(2) { animation-delay: 0.4s; }
+
+/* Capa trasera */
+.flor:nth-of-type(1) { animation-delay: 0.6s; }
+.flor:nth-of-type(2) { animation-delay: 0.6s; }
+.flor:nth-of-type(3) { animation-delay: 0.8s; }
+.flor:nth-of-type(4) { animation-delay: 0.8s; }
+
+/* Capa intermedia */
+.flor:nth-of-type(5) { animation-delay: 1.2s; }
+.flor:nth-of-type(6) { animation-delay: 1.2s; }
+
+/* Flor central */
+.flor:nth-of-type(7) { animation-delay: 1.0s; }
+
+/* Capa frontal */
+.flor:nth-of-type(8) { animation-delay: 1.4s; }
+.flor:nth-of-type(9) { animation-delay: 1.4s; }
+.flor:nth-of-type(10) { animation-delay: 1.6s; }
+.flor:nth-of-type(11) { animation-delay: 1.6s; }
+
+.envoltorio {
+  animation-delay: 2.0s;
+}
+
+.lazo {
+  animation-delay: 2.2s;
+}
+
+.fondo-animado {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.item-caida {
+  position: absolute;
+  top: -10%;
+  user-select: none;
+  animation: caer 15s linear infinite;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+@keyframes caer {
+  0% {
+    top: -10%;
+    transform: translateX(0vw) rotate(0deg);
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 0.7;
+  }
+  100% {
+    top: 110%;
+    transform: translateX(5vw) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Asignar SVGs y propiedades aleatorias a cada item */
+.item-caida:nth-child(2n) { /* Elementos pares serán ramos */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 60'%3e%3cg opacity='0.9'%3e%3cpath d='M 10 50 C 0 40, 0 20, 10 15 L 40 15 C 50 20, 50 40, 40 50 Z' fill='%23fbe9e7' stroke='%23ffccbc' stroke-width='1'/%3e%3cg transform='translate(25, 20)'%3e%3ccircle cx='0' cy='0' r='4' fill='%234e342e'/%3e%3cpath d='M0,0 C-4,-12 4,-12 0,0 Z' transform='rotate(0)' fill='%23ffeb3b'/%3e%3cpath d='M0,0 C-4,-12 4,-12 0,0 Z' transform='rotate(72)' fill='%23fbc02d'/%3e%3cpath d='M0,0 C-4,-12 4,-12 0,0 Z' transform='rotate(144)' fill='%23ffeb3b'/%3e%3cpath d='M0,0 C-4,-12 4,-12 0,0 Z' transform='rotate(216)' fill='%23fbc02d'/%3e%3cpath d='M0,0 C-4,-12 4,-12 0,0 Z' transform='rotate(288)' fill='%23ffeb3b'/%3e%3c/g%3e%3cg transform='translate(15, 28)'%3e%3ccircle cx='0' cy='0' r='3' fill='%234e342e'/%3e%3cpath d='M0,0 C-3,-9 3,-9 0,0 Z' transform='rotate(0)' fill='%23ffeb3b'/%3e%3cpath d='M0,0 C-3,-9 3,-9 0,0 Z' transform='rotate(72)' fill='%23fbc02d'/%3e%3cpath d='M0,0 C-3,-9 3,-9 0,0 Z' transform='rotate(144)' fill='%23ffeb3b'/%3e%3c/g%3e%3cg transform='translate(35, 28)'%3e%3ccircle cx='0' cy='0' r='3' fill='%234e342e'/%3e%3cpath d='M0,0 C-3,-9 3,-9 0,0 Z' transform='rotate(0)' fill='%23ffeb3b'/%3e%3cpath d='M0,0 C-3,-9 3,-9 0,0 Z' transform='rotate(72)' fill='%23fbc02d'/%3e%3cpath d='M0,0 C-3,-9 3,-9 0,0 Z' transform='rotate(144)' fill='%23ffeb3b'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e");
+  width: 40px;
+  height: 48px;
+}
+
+.item-caida:nth-child(2n + 1) { /* Elementos impares serán corazones */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 30'%3e%3cpath fill='rgba(255,138,128,0.85)' d='M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2 c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z'/%3e%3ctext x='16' y='13' font-family='cursive, sans-serif' font-size='6px' fill='white' text-anchor='middle' font-weight='bold'%3ete amo%3c/text%3e%3c/svg%3e");
+  width: 35px;
+  height: 35px;
+}
+
+.item-caida:nth-child(4n) { /* Hacemos algunos ramos más pequeños para variar */
+  width: 30px;
+  height: 36px;
+}
+
+/* Distribuir horizontalmente y variar animación */
+.item-caida:nth-child(1) { left: 10%; animation-duration: 15s; animation-delay: -2s; }
+.item-caida:nth-child(2) { left: 20%; animation-duration: 12s; animation-delay: -4s; transform: translateX(-5vw); }
+.item-caida:nth-child(3) { left: 30%; animation-duration: 18s; animation-delay: -1s; }
+.item-caida:nth-child(4) { left: 40%; animation-duration: 14s; animation-delay: -5s; transform: translateX(-5vw); }
+.item-caida:nth-child(5) { left: 50%; animation-duration: 16s; animation-delay: -3s; }
+.item-caida:nth-child(6) { left: 60%; animation-duration: 11s; animation-delay: -7s; transform: translateX(-5vw); }
+.item-caida:nth-child(7) { left: 70%; animation-duration: 20s; animation-delay: -2.5s; }
+.item-caida:nth-child(8) { left: 80%; animation-duration: 13s; animation-delay: -6s; transform: translateX(-5vw); }
+.item-caida:nth-child(9) { left: 90%; animation-duration: 17s; animation-delay: -8s; }
+.item-caida:nth-child(10) { left: 5%; animation-duration: 19s; animation-delay: -10s; transform: translateX(-5vw); }
+.item-caida:nth-child(11) { left: 15%; animation-duration: 14s; animation-delay: -12s; }
+.item-caida:nth-child(12) { left: 25%; animation-duration: 13s; animation-delay: -14s; transform: translateX(-5vw); }
+.item-caida:nth-child(13) { left: 35%; animation-duration: 16s; animation-delay: -9s; }
+.item-caida:nth-child(14) { left: 45%; animation-duration: 12s; animation-delay: -11s; transform: translateX(-5vw); }
+.item-caida:nth-child(15) { left: 55%; animation-duration: 18s; animation-delay: -13s; }
+.item-caida:nth-child(16) { left: 65%; animation-duration: 15s; animation-delay: -15s; transform: translateX(-5vw); }
+.item-caida:nth-child(17) { left: 75%; animation-duration: 13s; animation-delay: -4s; }
+.item-caida:nth-child(18) { left: 85%; animation-duration: 19s; animation-delay: -6s; transform: translateX(-5vw); }
+.item-caida:nth-child(19) { left: 95%; animation-duration: 12s; animation-delay: -8s; }
+.item-caida:nth-child(20) { left: 2%; animation-duration: 20s; animation-delay: -10s; transform: translateX(-5vw); }
+
+/* Estilos para los corazones con frases */
+.frase-corazon {
+  position: absolute;
+  width: 180px;
+  height: 160px;
+  opacity: 0;
+  animation: aparecerCorazon 1s ease-out forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.frase-corazon p {
+  position: relative;
+  z-index: 2;
+  color: #5d4037;
+  font-size: 0.78em; /* Tamaño base para frases medianas */
+  line-height: 1.4;
+  text-align: center;
+  padding: 10px;
+  font-family: 'Georgia', serif;
+  max-width: 90%;
+}
+
+.frase-corazon::before,
+.frase-corazon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 94px;
+  height: 150px;
+  border-radius: 90px 90px 0 0;
+  background: rgba(255, 138, 128, 0.85); /* Un rojo-rosado suave */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.frase-corazon::before {
+  left: 90px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.frase-corazon::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+/* Posicionamiento de cada corazón */
+#corazon1 { top: 0; left: 0; transform: rotate(-15deg); animation-delay: 3.0s; }
+#corazon2 { top: 0; right: 0; transform: rotate(15deg); animation-delay: 3.2s; }
+#corazon3 { top: 30%; left: -5%; transform: rotate(-20deg); animation-delay: 3.4s; }
+#corazon4 { top: 30%; right: -5%; transform: rotate(20deg); animation-delay: 3.6s; }
+#corazon5 { top: 60%; left: 5%; transform: rotate(-15deg); animation-delay: 3.8s; }
+#corazon6 { top: 60%; right: 5%; transform: rotate(15deg); animation-delay: 4.0s; }
+
+/* Hacemos la letra más pequeña para las frases más largas */
+#corazon1 p,
+#corazon2 p,
+#corazon6 p {
+  font-size: 0.72em;
+}
+
+@keyframes aparecerCorazon {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Ajuste de animación del poema principal */
+.poema-container {
+  animation-delay: 5s; /* Aparece después de los corazones */
+}
+
+/* Ajuste de la línea divisoria */
+.poema-container hr {
+  display: none; /* Ya no es necesaria */
+}
+
+/* Estilos para el poema */
+.poema-container {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px 30px;
+  border-radius: 15px;
+  max-width: 90%;
+  width: 500px;
+  text-align: center;
+  color: #5d4037;
+  font-family: 'Georgia', serif;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  opacity: 0;
+  animation: aparecerPoema 1.5s ease-out forwards;
+  animation-delay: 5s; /* Después de que el ramo y los corazones se formen */
+  margin-top: 40px; /* Espacio entre el ramo y el poema */
+}
+
+.poema-container h2 {
+  color: #e91e63; /* Un color que resalte */
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.2em;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.poema-texto {
+  min-height: 250px; /* Evita que el contenedor salte de tamaño mientras se escribe */
+}
+
+.cursor-parpadeante {
+  animation: parpadear 1s step-end infinite;
+}
+
+@keyframes parpadear {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.poema-container p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+@keyframes aparecerPoema {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos para el contador de tiempo */
+.contador-container {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  opacity: 0;
+  animation: aparecerPoema 1.5s ease-out forwards;
+  animation-delay: 7s; /* Después del poema principal */
+}
+
+.contador-container h3 {
+  color: #5d4037;
+  font-family: 'Dancing Script', cursive;
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+
+.tiempo {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.tiempo div {
+  font-family: 'Georgia', serif;
+  color: #8d6e63;
+  font-size: 0.9em;
+}
+
+.tiempo span {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+  color: #e91e63;
+}
+
+@media (max-width: 600px) {
+  .ramo-container {
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea el contenido arriba */
+    padding: 5vh 20px 20px 20px;
+  }
+  .ramo-y-frases-container {
+    /* Mantenemos el posicionamiento relativo para que los corazones se queden alrededor */
+    transform: scale(0.9); /* Hacemos todo el conjunto un poco más pequeño */
+  }
+  .frase-corazon {
+    /* Hacemos los corazones más pequeños y ajustamos su posición para pantallas móviles */
+    transform: scale(0.55); /* Reducimos aún más el tamaño de los corazones y su texto */
+    animation-delay: 1s !important; /* Animación más rápida en móvil */
+  }
+  /* Reajustamos la posición de cada corazón para que se agrupen mejor */
+  #corazon1 { top: 5%; left: 0; }
+  #corazon2 { top: 5%; right: 0; }
+  #corazon3 { top: 33%; left: -10%; }
+  #corazon4 { top: 33%; right: -10%; }
+  #corazon5 { top: 60%; left: -5%; }
+  #corazon6 { top: 60%; right: -5%; }
+
+  .poema-container {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
+    animation-delay: 1.5s !important;
+  }
+
+  .poema-container h2 {
+    font-size: 1.8em; /* Reduce el tamaño del título en móviles */
+  }
+
+  .poema-container p {
+    font-size: 1em; /* Reduce el tamaño del texto en móviles */
+  }
+
+  .contador-container {
+    animation-delay: 2.5s !important;
+    margin-top: 20px;
+  }
+  .tiempo span {
+    font-size: 1.5em;
+  }
+  .tiempo div { font-size: 0.8em; }
+}
+
+/* Estilos para la sección de fotos */
+.fotos-container {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 40px;
+  text-align: center;
+  opacity: 0;
+  animation: aparecerPoema 1.5s ease-out forwards;
+  animation-delay: 6s; /* Aparece después del poema y los corazones */
+}
+
+.fotos-container h3 {
+  color: #5d4037;
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.foto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.foto {
+  position: relative; /* Para posicionar la flor superpuesta */
+  background: #d8bfd8; /* Color de marco morado */
+  padding: 15px 15px 25px 15px;
+  border-radius: 4px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.foto:nth-child(odd) {
+  transform: rotate(-3deg);
+}
+
+.foto:nth-child(even) {
+  transform: rotate(3deg);
+}
+
+.foto:hover {
+  z-index: 10; /* Se mantiene para que la foto activa pase al frente si se superpone */
+}
+
+.foto > img:first-child {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  border: 2px solid #fff;
+}
+
+.foto p {
+  margin-top: 15px;
+  margin-bottom: 0;
+  font-family: 'Georgia', serif;
+  color: #5d4037;
+  font-size: 0.9em;
+}
+
+.overlay-flor {
+  position: absolute;
+  width: 70px; /* Tamaño de la flor superpuesta */
+  height: auto;
+  right: 12px;
+  bottom: 32px;
+  transform: rotate(15deg);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+}
+
+.overlay-flor:hover {
+  transform: rotate(15deg) scale(1.15);
+}
+
+/* Estilos para el modal del poema */
+.poema-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.poema-modal-content {
+  position: relative;
+  background: #fffaf0;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+  font-family: 'Georgia', serif;
+  color: #5d4037;
+  line-height: 1.7;
+  font-size: 1.1em;
+}
+
+.poema-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2.5em;
+  color: #888;
+  cursor: pointer;
+  line-height: 1;
+}
+
+@media (max-width: 600px) {
+  .fotos-container {
+    animation-delay: 2s !important; /* Animación más rápida en móvil */
+    margin-top: 30px;
+  }
+
+  .foto-grid {
+    gap: 20px; /* Reducir el espacio entre fotos */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Hace las fotos más pequeñas en móvil */
+  }
+
+  .foto:nth-child(odd),
+  .foto:nth-child(even) {
+    transform: none; /* Quitar la inclinación en móviles */
+  }
+}
+
+/* Estilos para reiniciar la animación */
+.ramo-container.reanimating .flor,
+.ramo-container.reanimating .hoja,
+.ramo-container.reanimating .envoltorio,
+.ramo-container.reanimating .lazo,
+.ramo-container.reanimating .frase-corazon,
+.ramo-container.reanimating .poema-container,
+.ramo-container.reanimating .fotos-container, .ramo-container.reanimating .contador-container,
+.ramo-container.reanimating .placed-flower {
+  animation: none;
+  opacity: 0;
+}
+
+/* Estilos para las flores arrastrables y colocadas */
+.placed-flower, .dragging-flower {
+  position: absolute; /* 'fixed' se establece en línea para dragging-flower */
+  z-index: 1100;
+  transform: translate(-50%, -50%) rotate(-10deg); /* El centrado y la rotación ahora se manejan en línea */
+  filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.3));
+  user-select: none;
+  width: 70px; /* Ancho de la cabeza de la flor */
+  height: 220px; /* Altura aproximada para flor + tallo */
+  pointer-events: auto; /* El contenedor es lo que se puede arrastrar */
+}
+
+.placed-flower {
+  cursor: grab;
+}
+
+.placed-flower-head {
+  width: 100%; /* 70px */
+  height: auto;
+  position: relative; /* Para apilar sobre el tallo */
+  z-index: 1;
+}
+
+.placed-flower-stem-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none; /* El SVG no debe capturar eventos del ratón */
+}
+
+.dragging-flower {
+  cursor: grabbing;
+  transition: none; /* Para que el movimiento sea instantáneo */
+  opacity: 0.8;
+}
+
+.ramo-svg:active {
+  cursor: grabbing;
+}
+
+.placed-flower:active {
+  cursor: grabbing;
+  z-index: 1101; /* Asegura que la flor que se mueve esté por encima de las otras */
+}
+
+/* Estilo para la palabra flotante */
+.palabra-flor-flotante {
+  position: fixed;
+  background: rgba(255, 112, 67, 0.9);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5em;
+  pointer-events: none;
+  transform: translate(-50%, -150%);
+  z-index: 1200;
+  animation: flotarYDesvanecer 1.5s ease-out forwards;
+}
+
+@keyframes flotarYDesvanecer {
+  from { opacity: 1; transform: translate(-50%, -150%) scale(0.8); }
+  to { opacity: 0; transform: translate(-50%, -250%) scale(1.2); }
+}
