@@ -173,7 +173,7 @@ la única razón de mi sonreír.`;
       let index = 0;
       const typingInterval = setInterval(() => {
         if (index < poemToType.length) {
-          setDisplayedModalPoem(prev => poemToType.substring(0, prev.length + 1));
+          setDisplayedModalPoem(poemToType.substring(0, index + 1));
           index++;
         } else {
           clearInterval(typingInterval);

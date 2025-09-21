@@ -289,6 +289,7 @@
 
 .poema-texto {
   min-height: 250px; /* Evita que el contenedor salte de tamaño mientras se escribe */
+  white-space: pre-wrap; /* Respeta los saltos de línea y espacios */
 }
 
 .cursor-parpadeante {
@@ -513,6 +514,7 @@
   color: #5d4037;
   line-height: 1.7;
   font-size: 1.1em;
+  white-space: pre-wrap; /* Respeta los saltos de línea y espacios */
 }
 
 .poema-modal-close {
