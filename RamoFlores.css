@@ -63,6 +63,8 @@
 .flor, .hoja, .envoltorio, .lazo {
   opacity: 0;
   animation: aparecerDesdeAbajo 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  -webkit-animation: aparecerDesdeAbajo 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  will-change: transform, opacity;
   cursor: pointer;
 }
 
@@ -181,9 +183,11 @@
   height: 160px;
   opacity: 0;
   animation: aparecerCorazon 1s ease-out forwards;
+  -webkit-animation: aparecerCorazon 1s ease-out forwards;
   display: flex;
   justify-content: center;
   align-items: center;
+  will-change: transform, opacity;
 }
 
 .frase-corazon p {
@@ -213,22 +217,24 @@
 .frase-corazon::before {
   left: 90px;
   transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
   transform-origin: 0 100%;
 }
 
 .frase-corazon::after {
   left: 0;
   transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
   transform-origin: 100% 100%;
 }
 
 /* Posicionamiento de cada corazón */
-#corazon1 { top: 0; left: 0; transform: rotate(-15deg); animation-delay: 3.0s; }
-#corazon2 { top: 0; right: 0; transform: rotate(15deg); animation-delay: 3.2s; }
-#corazon3 { top: 30%; left: -5%; transform: rotate(-20deg); animation-delay: 3.4s; }
-#corazon4 { top: 30%; right: -5%; transform: rotate(20deg); animation-delay: 3.6s; }
-#corazon5 { top: 60%; left: 5%; transform: rotate(-15deg); animation-delay: 3.8s; }
-#corazon6 { top: 60%; right: 5%; transform: rotate(15deg); animation-delay: 4.0s; }
+#corazon1 { top: 0; left: 0; transform: rotate(-15deg); -webkit-transform: rotate(-15deg); animation-delay: 3.0s; }
+#corazon2 { top: 0; right: 0; transform: rotate(15deg); -webkit-transform: rotate(15deg); animation-delay: 3.2s; }
+#corazon3 { top: 30%; left: -5%; transform: rotate(-20deg); -webkit-transform: rotate(-20deg); animation-delay: 3.4s; }
+#corazon4 { top: 30%; right: -5%; transform: rotate(20deg); -webkit-transform: rotate(20deg); animation-delay: 3.6s; }
+#corazon5 { top: 60%; left: 5%; transform: rotate(-15deg); -webkit-transform: rotate(-15deg); animation-delay: 3.8s; }
+#corazon6 { top: 60%; right: 5%; transform: rotate(15deg); -webkit-transform: rotate(15deg); animation-delay: 4.0s; }
 
 /* Hacemos la letra más pequeña para las frases más largas */
 #corazon1 p,
@@ -240,15 +246,15 @@
 @keyframes aparecerCorazon {
   0% {
     opacity: 0;
-    transform: scale(0.5);
+    transform: scale(0.5); -webkit-transform: scale(0.5);
   }
   50% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.1); -webkit-transform: scale(1.1);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1); -webkit-transform: scale(1);
   }
 }
 
@@ -275,6 +281,7 @@
   box-shadow: 0 4px 20px rgba(0,0,0,0.15);
   opacity: 0;
   animation: aparecerPoema 1.5s ease-out forwards;
+  -webkit-animation: aparecerPoema 1.5s ease-out forwards;
   animation-delay: 5s; /* Después de que el ramo y los corazones se formen */
   margin-top: 40px; /* Espacio entre el ramo y el poema */
 }
@@ -294,6 +301,7 @@
 
 .cursor-parpadeante {
   animation: parpadear 1s step-end infinite;
+  -webkit-animation: parpadear 1s step-end infinite;
 }
 
 @keyframes parpadear {
@@ -310,11 +318,11 @@
 @keyframes aparecerPoema {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(30px); -webkit-transform: translateY(30px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0); -webkit-transform: translateY(0);
   }
 }
 
@@ -326,6 +334,7 @@
   text-align: center;
   opacity: 0;
   animation: aparecerPoema 1.5s ease-out forwards;
+  -webkit-animation: aparecerPoema 1.5s ease-out forwards;
   animation-delay: 7s; /* Después del poema principal */
 }
 
@@ -418,6 +427,7 @@
   text-align: center;
   opacity: 0;
   animation: aparecerPoema 1.5s ease-out forwards;
+  -webkit-animation: aparecerPoema 1.5s ease-out forwards;
   animation-delay: 6s; /* Aparece después del poema y los corazones */
 }
 
@@ -443,11 +453,11 @@
 }
 
 .foto:nth-child(odd) {
-  transform: rotate(-3deg);
+  transform: rotate(-3deg); -webkit-transform: rotate(-3deg);
 }
 
 .foto:nth-child(even) {
-  transform: rotate(3deg);
+  transform: rotate(3deg); -webkit-transform: rotate(3deg);
 }
 
 .foto:hover {
@@ -475,14 +485,15 @@
   height: auto;
   right: 12px;
   bottom: 32px;
-  transform: rotate(15deg);
+  transform: rotate(15deg); -webkit-transform: rotate(15deg);
   cursor: pointer;
   transition: transform 0.2s ease;
+  -webkit-transition: -webkit-transform 0.2s ease;
   filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
 }
 
 .overlay-flor:hover {
-  transform: rotate(15deg) scale(1.15);
+  transform: rotate(15deg) scale(1.15); -webkit-transform: rotate(15deg) scale(1.15);
 }
 
 /* Estilos para el modal del poema */
@@ -542,7 +553,7 @@
 
   .foto:nth-child(odd),
   .foto:nth-child(even) {
-    transform: none; /* Quitar la inclinación en móviles */
+    transform: none; -webkit-transform: none; /* Quitar la inclinación en móviles */
   }
 }
 
@@ -563,7 +574,7 @@
 .placed-flower, .dragging-flower {
   position: absolute; /* 'fixed' se establece en línea para dragging-flower */
   z-index: 1100;
-  transform: translate(-50%, -50%) rotate(-10deg); /* El centrado y la rotación ahora se manejan en línea */
+  transform: translate(-50%, -50%) rotate(-10deg); -webkit-transform: translate(-50%, -50%) rotate(-10deg); /* El centrado y la rotación ahora se manejan en línea */
   filter: drop-shadow(3px 3px 5px rgba(0,0,0,0.3));
   user-select: none;
   width: 70px; /* Ancho de la cabeza de la flor */
@@ -618,11 +629,13 @@
   font-size: 1.5em;
   pointer-events: none;
   transform: translate(-50%, -150%);
+  -webkit-transform: translate(-50%, -150%);
   z-index: 1200;
   animation: flotarYDesvanecer 1.5s ease-out forwards;
+  -webkit-animation: flotarYDesvanecer 1.5s ease-out forwards;
 }
 
 @keyframes flotarYDesvanecer {
-  from { opacity: 1; transform: translate(-50%, -150%) scale(0.8); }
-  to { opacity: 0; transform: translate(-50%, -250%) scale(1.2); }
+  from { opacity: 1; transform: translate(-50%, -150%) scale(0.8); -webkit-transform: translate(-50%, -150%) scale(0.8); }
+  to { opacity: 0; transform: translate(-50%, -250%) scale(1.2); -webkit-transform: translate(-50%, -250%) scale(1.2); }
 }
