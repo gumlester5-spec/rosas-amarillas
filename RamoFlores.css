@@ -6,7 +6,7 @@
   align-items: center;
   min-height: 100vh;
   background: linear-gradient(135deg, #fff8e1 0%, #ffe082 100%);
-  padding: 20px;
+  padding: 20px 0; /* Eliminamos el padding lateral para evitar desbordes */
   overflow: hidden;
   position: relative; /* Necesario para la animación de fondo */
   cursor: pointer;
@@ -580,6 +580,7 @@
   width: 70px; /* Ancho de la cabeza de la flor */
   height: 220px; /* Altura aproximada para flor + tallo */
   pointer-events: auto; /* El contenedor es lo que se puede arrastrar */
+  touch-action: none; /* Evita el scroll y zoom del navegador en móviles */
 }
 
 .placed-flower {

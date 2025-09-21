@@ -17,6 +17,21 @@ const RamoFlores = () => {
 
   const isInitialLoad = React.useRef(true);
 
+  // Evita que el navegador traduzca la página
+  useEffect(() => {
+    document.documentElement.lang = 'es';
+    document.documentElement.setAttribute('translate', 'no');
+    const meta = document.createElement('meta');
+    meta.name = 'google';
+    meta.content = 'notranslate';
+    document.head.appendChild(meta);
+
+    return () => {
+      document.documentElement.removeAttribute('lang');
+      document.documentElement.removeAttribute('translate');
+      document.head.removeChild(meta);
+    };
+  }, []);
   
   // Carga las flores desde Firebase al iniciar
   useEffect(() => {
