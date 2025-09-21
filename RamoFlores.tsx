@@ -6,7 +6,6 @@ import './RamoFlores.css';
 
 const RamoFlores = () => {
   const [poemaVisible, setPoemaVisible] = useState<number | null>(null);
-  const [reanimating, setReanimating] = useState(false);
   const [placedFlowers, setPlacedFlowers] = useState<{ id: number; x: number; y: number; size: number; rotation: number }[]>([]);
   const [dragging, setDragging] = useState<{ x: number; y: number } | null>(null);
   const [nextFlowerId, setNextFlowerId] = useState(0);
@@ -38,11 +37,11 @@ const RamoFlores = () => {
 
   // Guarda las flores en Firebase cuando cambian
   useEffect(() => {
-    if (!isInitialLoad.current && !reanimating) {
+    if (!isInitialLoad.current) {
       const flowersRef = ref(db, 'flowers');
       set(flowersRef, placedFlowers);
     }
-  }, [placedFlowers, reanimating]);
+  }, [placedFlowers]);
 
   const fullPoem = `Mi amor, mi vida, mi lucero,<br />
 como estas flores que ves nacer,<br />
@@ -61,10 +60,9 @@ la única razón de mi sonreír.`;
 
   // Animación de escritura del poema
   useEffect(() => {
-    if (reanimating) return;
     const poemTimer = setTimeout(() => setPoemAnimationStarted(true), 5000);
     return () => clearTimeout(poemTimer);
-  }, [reanimating]);
+  }, []);
 
   useEffect(() => {
     if (poemAnimationStarted) {
@@ -188,21 +186,6 @@ la única razón de mi sonreír.`;
 
   const handleFlorClick = (index: number) => {
     setPoemaVisible(index);
-  };
-
-  const handleRamoClick = () => {
-    setReanimating(true);
-    // Limpiamos las flores y el poema directamente aquí
-    setPlacedFlowers([]);
-    setPoemAnimationStarted(false);
-    setDisplayedPoem('');
-    // También limpiamos la base de datos
-    const flowersRef = ref(db, 'flowers');
-    set(flowersRef, []);
-
-    setTimeout(() => {
-      setReanimating(false);
-    }, 100); // Pequeño delay para forzar el reinicio de la animación
   };
 
   const handleMouseDownOnBouquet = (e: React.MouseEvent) => {
@@ -394,14 +377,14 @@ la única razón de mi sonreír.`;
   ];
 
   return (
-    <div className={`ramo-container ${reanimating ? 'reanimating' : ''}`}>
+    <div className="ramo-container">
       <div className="fondo-animado">
         {[...Array(20)].map((_, i) => (
           <div key={i} className="item-caida"></div>
         ))}
       </div>
       <div className="ramo-y-frases-container">
-        <svg className="ramo-svg" viewBox="0 0 500 500" onMouseDown={handleMouseDownOnBouquet}>
+        <svg className="ramo-svg" viewBox="0 0 500 500" onMouseDown={handleMouseDownOnBouquet} >
           <g className="ramo" transform="translate(250, 380)">
 
           {/* Envoltorio */}

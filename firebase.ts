@@ -6,13 +6,13 @@ import { getDatabase } from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyC9AOTISFtwIds8JJtacp8ZvSeFS9-BaNE",
-  authDomain: "caja-clara-w4vdh.firebaseapp.com",
-  databaseURL: "https://caja-clara-w4vdh-default-rtdb.firebaseio.com",
-  projectId: "caja-clara-w4vdh",
-  storageBucket: "caja-clara-w4vdh.firebasestorage.app",
-  messagingSenderId: "1078712374746",
-  appId: "1:1078712374746:web:39b08f40407f1681f85ce3"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_DATABASE_URL,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID
 };
 
 // Initialize Firebase
