@@ -68,10 +68,10 @@ la única razón de mi sonreír.`;
     if (poemAnimationStarted) {
       let i = 0;
       const poemTextForTyping = fullPoem.replace(/<br \/>/g, '\n');
-      setDisplayedPoem('');
+      setDisplayedPoem(' '); // Inicia con un espacio para evitar que el contenedor colapse
       const typingInterval = setInterval(() => {
         if (i < poemTextForTyping.length) {
-          setDisplayedPoem(prev => prev + poemTextForTyping.charAt(i));
+          setDisplayedPoem(poemTextForTyping.substring(0, i + 1));
           i++;
         } else {
           clearInterval(typingInterval);

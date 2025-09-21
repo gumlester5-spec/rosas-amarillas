@@ -371,15 +371,15 @@
   .frase-corazon {
     /* Hacemos los corazones más pequeños y ajustamos su posición para pantallas móviles */
     transform: scale(0.55); /* Reducimos aún más el tamaño de los corazones y su texto */
-    animation-delay: 1s !important; /* Animación más rápida en móvil */
+    animation-delay: 2s !important; /* Animación más rápida en móvil */
   }
   /* Reajustamos la posición de cada corazón para que se agrupen mejor */
-  #corazon1 { top: 5%; left: 0; }
-  #corazon2 { top: 5%; right: 0; }
-  #corazon3 { top: 33%; left: -10%; }
-  #corazon4 { top: 33%; right: -10%; }
-  #corazon5 { top: 60%; left: -5%; }
-  #corazon6 { top: 60%; right: -5%; }
+  #corazon1 { top: 5%; left: -5%; }
+  #corazon2 { top: 5%; right: -5%; }
+  #corazon3 { top: 33%; left: -15%; }
+  #corazon4 { top: 33%; right: -15%; }
+  #corazon5 { top: 60%; left: -10%; }
+  #corazon6 { top: 60%; right: -10%; }
 
   .poema-container {
     margin-top: 20px;
@@ -387,7 +387,7 @@
     max-width: 100%;
     padding: 15px;
     box-sizing: border-box; /* Asegura que el padding no cause desbordamiento */
-    animation-delay: 1.5s !important;
+    animation-delay: 3s !important;
   }
 
   .poema-container h2 {
@@ -399,7 +399,8 @@
   }
 
   .contador-container {
-    animation-delay: 2.5s !important;
+    width: 100%;
+    animation-delay: 4s !important;
     margin-top: 20px;
   }
   .tiempo span {
@@ -411,7 +412,7 @@
 /* Estilos para la sección de fotos */
 .fotos-container {
   width: 100%;
-  max-width: 900px;
+  max-width: 100%;
   margin-top: 40px;
   text-align: center;
   opacity: 0;
@@ -528,7 +529,7 @@
 
 @media (max-width: 600px) {
   .fotos-container {
-    animation-delay: 2s !important; /* Animación más rápida en móvil */
+    animation-delay: 4.5s !important; /* Animación más rápida en móvil */
     margin-top: 30px;
   }
 
